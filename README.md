@@ -1,6 +1,8 @@
 # live-db-map-update
 Updates simulated device location values from a Node-Red flow to a Database to a node.js application with a Google Maps frame. Done as part of a task at a summer internship. Good job, me! (No?)
 
+**Note:** If you would like to see the presentation and demo video made during the internship, you may head on over to the **presentations** folder. 
+
 ## Getting Started
 
 ### Dependencies
