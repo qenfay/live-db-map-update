@@ -1,0 +1,330 @@
+[
+    {
+        "id": "76656c3d.61dcf4",
+        "type": "tab",
+        "label": "Position Update Flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "469f825d.d7904c",
+        "type": "inject",
+        "z": "76656c3d.61dcf4",
+        "name": "device1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "device",
+                "v": "device1",
+                "vt": "str"
+            },
+            {
+                "p": "original_lat",
+                "v": "33.646",
+                "vt": "num"
+            },
+            {
+                "p": "original_lng",
+                "v": "72.993",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "69ac179a.113158"
+            ]
+        ],
+        "icon": "font-awesome/fa-location-arrow"
+    },
+    {
+        "id": "e38ea9d0.133ad8",
+        "type": "debug",
+        "z": "76656c3d.61dcf4",
+        "name": "Debug Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "69ac179a.113158",
+        "type": "function",
+        "z": "76656c3d.61dcf4",
+        "name": "device",
+        "func": "device = msg.device;\n\n/* --- ABSTRACTION :: get new lat and lng values from sensor*/\noriginal_lat = context.get('lat') || msg.original_lat;\noriginal_lng = context.get('lng') || msg.original_lng;\nd_lat = Math.random() * 0.0001 * (Math.random() < 0.5 ? 1 : -1);\nd_lng = Math.random() * 0.0001 * (Math.random() < 0.5 ? 1 : -1);\nlat = parseFloat((original_lat + d_lat).toFixed(4));\nlng = parseFloat((original_lng + d_lng).toFixed(4));\ncontext.set('lat', lat);\ncontext.set('lng', lng);\n/* --- END ABSTRACTION */\n\nmsg.payload = [lat, lng, device, lat, lng]\nmsg.topic = \"INSERT INTO positions VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE `lat`=?, `lng`=?;\";\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "e38ea9d0.133ad8",
+                "2d9c20a3.328fb"
+            ]
+        ]
+    },
+    {
+        "id": "d01964b4.a72668",
+        "type": "comment",
+        "z": "76656c3d.61dcf4",
+        "name": "Sensor Abstraction",
+        "info": "",
+        "x": 210,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c9a742e0.5b33",
+        "type": "inject",
+        "z": "76656c3d.61dcf4",
+        "name": "device2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "device",
+                "v": "device2",
+                "vt": "str"
+            },
+            {
+                "p": "original_lat",
+                "v": "33.6435",
+                "vt": "num"
+            },
+            {
+                "p": "original_lng",
+                "v": "72.9930",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 180,
+        "wires": [
+            [
+                "69ac179a.113158"
+            ]
+        ],
+        "icon": "font-awesome/fa-location-arrow"
+    },
+    {
+        "id": "2bec5e65.78fd52",
+        "type": "inject",
+        "z": "76656c3d.61dcf4",
+        "name": "device3",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "device",
+                "v": "device3",
+                "vt": "str"
+            },
+            {
+                "p": "original_lat",
+                "v": "33.644",
+                "vt": "num"
+            },
+            {
+                "p": "original_lng",
+                "v": "72.994",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 260,
+        "wires": [
+            [
+                "69ac179a.113158"
+            ]
+        ],
+        "icon": "font-awesome/fa-location-arrow"
+    },
+    {
+        "id": "5740556a.bf312c",
+        "type": "inject",
+        "z": "76656c3d.61dcf4",
+        "name": "device4",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "device",
+                "v": "device4",
+                "vt": "str"
+            },
+            {
+                "p": "original_lat",
+                "v": "33.647",
+                "vt": "num"
+            },
+            {
+                "p": "original_lng",
+                "v": "73.0000",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 320,
+        "wires": [
+            [
+                "69ac179a.113158"
+            ]
+        ],
+        "icon": "font-awesome/fa-location-arrow"
+    },
+    {
+        "id": "2d9c20a3.328fb",
+        "type": "mysql",
+        "z": "76656c3d.61dcf4",
+        "mydb": "f4cdef12.51369",
+        "name": "database",
+        "x": 600,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "17a18adb.e3e355",
+        "type": "inject",
+        "z": "76656c3d.61dcf4",
+        "name": "device4",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "device",
+                "v": "device4",
+                "vt": "str"
+            },
+            {
+                "p": "original_lat",
+                "v": "33.6450",
+                "vt": "num"
+            },
+            {
+                "p": "original_lng",
+                "v": "73.0000",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 740,
+        "wires": [
+            [
+                "9f22c94a.9fd988"
+            ]
+        ],
+        "icon": "font-awesome/fa-location-arrow"
+    },
+    {
+        "id": "9f22c94a.9fd988",
+        "type": "function",
+        "z": "76656c3d.61dcf4",
+        "name": "device",
+        "func": "device = msg.device;\n\n/* --- ABSTRACTION :: get new lat and lng values from sensor*/\noriginal_lat = context.get('lat') || msg.original_lat;\noriginal_lng = context.get('lng') || msg.original_lng;\nd_lat = Math.random() * 0.001 * (Math.random() < 0.5 ? 1 : -1);\nd_lng = Math.random() * 0.001 * (Math.random() < 0.5 ? 1 : -1);\nlat = parseFloat((original_lat + d_lat).toFixed(4));\nlng = parseFloat((original_lng + d_lng).toFixed(4));\ncontext.set('lat', lat);\ncontext.set('lng', lng);\n/* --- END ABSTRACTION */\n\nmsg.payload = {\n    \"lat\" : lat,\n    \"lng\" : lng,\n    \"device\" : device\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eda445cf.031e48",
+        "type": "comment",
+        "z": "76656c3d.61dcf4",
+        "name": "Fill DB Details Here",
+        "info": "",
+        "x": 630,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f4cdef12.51369",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "",
+        "port": "",
+        "db": "",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
